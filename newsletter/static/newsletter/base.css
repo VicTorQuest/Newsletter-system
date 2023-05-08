@@ -3,15 +3,29 @@ body {
     background: #f2f2f2
 }
 
+.navbar {
+    background-color: white !important;
+}
+
+.navbar-brand {
+    font-family: sans-serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #243c4f;
+}
+
+.navbar ul li a {
+    font-size: 18px;
+    font-weight: 500;
+}
+
 .newsletter {
     padding: 80px 0;
-    background: #f2f2f2;
 }
 
 .newsletter .content {
     max-width: 650px;
     margin: 0 auto;
-    text-align: center;
     position: relative;
     z-index: 2;
 }
@@ -19,6 +33,7 @@ body {
 .newsletter .content h2 {
     color: #243c4f;
     margin-bottom: 40px;
+    font-size: 1.5rem;
 }
 
 .newsletter .content .form-control {
@@ -39,3 +54,16 @@ body {
     color: #fff;
     font-weight: 600;
 }
+
+@media screen and (min-width:700px)  {
+    .newsletter {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* @media screen and (max-width:480px)  {
+  
+} */
