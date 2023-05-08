@@ -26,6 +26,7 @@ body {
 .newsletter .content {
     max-width: 650px;
     margin: 0 auto;
+    text-align: center;
     position: relative;
     z-index: 2;
 }
@@ -33,7 +34,12 @@ body {
 .newsletter .content h2 {
     color: #243c4f;
     margin-bottom: 40px;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.newsletter .content h1 {
+    margin-bottom: 40px;
+    font-size: 2.8rem;
 }
 
 .newsletter .content .form-control {

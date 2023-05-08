@@ -136,6 +136,6 @@ def send_news_letter(request):
             form.save()
             messages.success(request, "Mass email letter sent successfully")
             return redirect('send_news_letter')
-    return render(request, 'send_news_letter.html', {
+    return render(request, 'newsletter/send_news_letter.html', {
         'form': form,
     })

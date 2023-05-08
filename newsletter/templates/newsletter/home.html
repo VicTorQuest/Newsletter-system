@@ -1,26 +1,27 @@
+{% extends 'newsletter/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block title %}Subscribe{% endblock title %}
 
-{% block content %}\
+{% block content %}
  <section class="newsletter">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="content">
                         <form method="post">
-                            {% csrf_token %}
-                            <h2 class="text-center">SUBSCRIBE TO OUR NEWSLETTER</h2>
+                            {% csrf_token %}\
+                            <h1>Welcome to Our Newsletter!</h1>
+                            <h2 class="text-center text-uppercase">Stay informed, stay ahead – subscribe to our newsletter now!</h2>
                             {% include 'newsletter/message.html' %}
-                            {{form|crispy}}
-                            <button class="btn" type="submit">Subscribe</button>
+                    
 
-                            <!-- <div class="input-group">
+                            <div class="input-group">
                                 <input type="email" class="form-control" placeholder="Enter your email">
                                 <span class="input-group-btn">
                                     <button class="btn" type="submit">Subscribe</button>
                                 </span>
-                            </div> -->
+                            </div>
                         </form>
                     </div>
                 </div>
