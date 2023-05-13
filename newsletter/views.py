@@ -111,6 +111,13 @@ def unsubscribe_successful(request):
         })
     else:
         return redirect('unsubscribe')
+    
+
+def send_preference_link(request):
+    return render(request,  'newsletter/send_preference_link.html', {
+        
+    })
+
 
 def edit_preference(request, slug):
     preference = get_object_or_404(Subscriber, slug=slug)

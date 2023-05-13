@@ -1,22 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Fruktur&family=Josefin+Sans:wght@300;400;500;600;700&display=swap');
+
 body {
     box-sizing: border-box;
-    background: #f2f2f2
+    background: #f2f2f2;
+    font-family: 'Josefin Sans', sans-serif;
 }
+
+
+h1, h2, .navbar-brand {
+    font-family: 'Fruktur', cursive;
+}
+
 
 .navbar {
     background-color: white !important;
 }
 
 .navbar-brand {
-    font-family: sans-serif;
     font-size: 1.4rem;
-    font-weight: bold;
-    color: #243c4f;
+    color: #294c69;
 }
 
 .navbar ul li a {
     font-size: 18px;
     font-weight: 500;
+}
+
+.active {
+    color: #294c69 !important;
 }
 
 .newsletter {
@@ -34,11 +45,14 @@ body {
 .newsletter .content h2 {
     color: #243c4f;
     margin-bottom: 40px;
+    font-weight: 700;
     font-size: 1.4rem;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 .newsletter .content h1 {
     margin-bottom: 40px;
+    color: #294c69;
     font-size: 2.8rem;
 }
 
@@ -70,6 +84,9 @@ body {
     }
 }
 
-/* @media screen and (max-width:480px)  {
-  
-} */
+@media screen and (max-width:480px)  {
+    .newsletter .content h1 {
+        margin-bottom: 40px;
+        font-size: 2.5rem;
+    }
+}
