@@ -37,12 +37,7 @@ def home(request):
         EmailThreading(email=email_msg).start()
 
         return redirect('subscription_confirmed')
-    # else:
-    #     for key, error in list(form.errors.items()):
-    #         if key == 'captcha' and error[0] == 'This field is required.':
-    #             messages.error(request, 'You must pass the reCAPTCHA ')
-    #             continue
-    #         messages.error(request, error)
+   
     return render(request, 'newsletter/home.html', {
     })
 
@@ -129,12 +124,22 @@ def edit_preference(request, slug):
     form = EditPreference(instance=preference)
     if request.method == 'POST':
         form = EditPreference(request.POST or None, instance=preference)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Preference update successful')
-            return redirect('subscription_confirmed')
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Preference update successful')
+                return redirect('subscription_confirmed')
+            else:
+                for key, error in list(form.errors.items()):
+                    if key == 'captcha' and error[0] == 'This field is required.':
+                        messages.error(request, 'You must pass the reCAPTCHA ')
+                        continue
+                    messages.error(request, error)
+        except:
+            messages.error(request, 'You must pass the reCAPTCHA ')
     return render(request, 'newsletter/edit_preference.html', {
         'form': form,
+        'site_key': settings.RECAPTCHA_PUBLIC_KEY
     })
 
 

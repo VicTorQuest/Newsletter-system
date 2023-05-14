@@ -51,6 +51,15 @@ class EditPreference(forms.ModelForm):
     last_name = forms.CharField(label='Last Name', validators=[validate_name],widget=forms.TextInput(
         attrs={"class": "form-control"}
     ))
+
+    captcha = fields.ReCaptchaField(
+    widget=ReCaptchaV3(
+        attrs={
+            'required_score':0.85,
+
+        }
+    )
+)
     
     class Meta:
         model = Subscriber

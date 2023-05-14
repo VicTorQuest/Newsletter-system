@@ -2,6 +2,13 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block title %}Edit newsletter prefrences | {% endblock title %}
+{% block link %}
+<style>
+    #div_id_captcha label {
+        display: none !important;
+    }
+</style>
+{% endblock link %}
 {% block content %}
 <section class="newsletter">
     <div class="container">
