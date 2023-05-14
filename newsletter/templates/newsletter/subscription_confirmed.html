@@ -1,23 +1,27 @@
 {% extends 'newsletter/base.html' %}
 {% load static %}
-{% load crispy_forms_tags %}
-{% block link %}
-<link rel="stylesheet" href="{% static 'styles/subscribe.css' %}">
-{% endblock link %}
 {% block title %}Subscription confirmed | {% endblock title %}
 
 {% block content %}
-<div class="col-md-12 mb-0 post p-3 pb-4 my-lg-0 mb-5 p-lg-5 full-post subscription">
-    <h1 class="pb-3 mb-4 mb-lg-5 heading">Subscription confirmed</h1>
-    {% include 'newsletter/message.html' %}
-    <p>Your subscription to our list has been confirmed.</p>
-    <p>Thank you for subscribing!</p>
-    <p>Victor okolie</p>
-    <div class="d-lg-flex">
-        <a href="{% url 'home' %}" class="btn submit mr-3 text-dark font-weight">Continue to our website</a>
-        <p class="mr-3 mt-2 mt-lg-0">or</p>
-        <a href="{% url 'edit_preference' email_slug %}" class="btn submit text-dark">manage your preference</a>
+<section class="newsletter">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="content">
+                    <form method="post">
+                        {% csrf_token %}
+                        {% include 'newsletter/message.html' %}
+                        <h2 class="text-center text-uppercase">Your subscription to our list has been confirmed.<h2>
+                        <p>Thank you for subscribing!</p>
+                        <a href="{% url 'home' %}" class="btn link-btn mb-3 mb-lg-0">Continue to home</a>
+                        <a href="{% url 'edit_preference' email_slug %}" class="btn link-btn">manage your preference</a>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>
 {% endblock content %}
+
+
 

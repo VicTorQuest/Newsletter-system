@@ -28,6 +28,7 @@ h1, h2, .navbar-brand {
 
 .active {
     color: #294c69 !important;
+    font-weight: 600 !important;
 }
 
 .newsletter {
@@ -75,8 +76,31 @@ h1, h2, .navbar-brand {
     font-weight: 600;
 }
 
+.link-btn {
+    min-height: auto !important;
+}
+
 .asteriskField {
     display: none;
+}
+
+
+.form-control {
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 1.8rem;
+}
+
+.asteriskField {
+    display: none;
+}
+
+select.form-control {
+    color: black !important;
+}
+
+.form-check {
+    margin-top: 1.5rem;
 }
 
 @media screen and (min-width:700px)  {
