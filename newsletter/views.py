@@ -10,14 +10,16 @@ from .models import Subscriber, UnsubscribedEmail
 from .thread import EmailThreading
 from newsletter.forms import Subscribetoletter, SendNewsLetter, EditPreference, UnsubscribedEmailReason
 
+domain_name = getattr(settings, 'DOMAIN_NAME')
+site_email = getattr(settings, 'APPLICATION_EMAIL')
+
 # Create your views here.
 
 def home(request):
     if request.method == "POST":
         email = request.POST.get('email')
-        print(email)
+        
         email_already_exists = Subscriber.objects.filter(email=email).exists()
-        print(email_already_exists)
         if email_already_exists:
             messages.error(request, "This email is already subscribed to our newsletter")
             return redirect('home')
@@ -26,13 +28,13 @@ def home(request):
         request.session['subscribedemail'] = subscribedemail.slug
         messages.success(request, "Subscription confirmed")
 
-        # html_template_path = "newsletter/new_subscriber_email.html"
-        # context_data = {'first_name': first_name, 'edit_preference': domain_name + reverse('edit_preference', kwargs={'slug': obj.slug}), 'unsubscribe': domain_name + reverse("unsubscribe", kwargs={'slug': obj.slug}), 'privacy_link': domain_name + reverse('privacy')}
-        # email_html_template = get_template(html_template_path).render(context_data)
-        # receiver_email = email
-        # email_msg = EmailMessage("Thanks for joining us", email_html_template, site_email, [receiver_email], reply_to=[site_email])
-        # email_msg.content_subtype = 'html'
-        # EmailThreading(email=email_msg).start()
+        html_template_path = "newsletter/new_subscriber_email.html"
+        context_data = {'first_name': subscribedemail.first_name, 'domain_name': domain_name}
+        email_html_template = get_template(html_template_path).render(context_data)
+        receiver_email = email
+        email_msg = EmailMessage("Thanks for joining us", email_html_template, site_email, [receiver_email], reply_to=[site_email])
+        email_msg.content_subtype = 'html'
+        EmailThreading(email=email_msg).start()
 
         return redirect('subscription_confirmed')
     # else:
