@@ -143,7 +143,6 @@ def edit_preference(request, slug):
     })
 
 
-@staff_member_required
 def send_news_letter(request):
     form = SendNewsLetter()
     if request.method == "POST":
@@ -155,3 +154,6 @@ def send_news_letter(request):
     return render(request, 'newsletter/send_news_letter.html', {
         'form': form,
     })
+
+def adminaaccess(request):
+    return render(request, 'newsletter/adminaaccess.html')

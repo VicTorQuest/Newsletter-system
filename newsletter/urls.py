@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import home, subscription_confirmed, send_news_letter, edit_preference, start_unsubscribe, unsubscribe, unsubscribe_successful, send_preference_link
+from .views import home, subscription_confirmed, send_news_letter, edit_preference, start_unsubscribe, unsubscribe, unsubscribe_successful, send_preference_link, adminaaccess
 
 
 
 urlpatterns = [
     path('', home, name="home"),
+    path('how-to-access-admin/', adminaaccess, name='adminaaccess'),
     path('subscription_confirmed', subscription_confirmed, name="subscription_confirmed"),
     path('subscription-confirmed/', subscription_confirmed, name='subscription_confirmed'),
     path('edit-preference/', send_preference_link, name='send_preference_link'),

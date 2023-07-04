@@ -3,6 +3,7 @@
 {% load crispy_forms_tags %}
 {% block title %}Send newsletter | {% endblock title %}
 
+
 {% block content %}
 <section class="newsletter">
     <div class="container">
@@ -21,6 +22,14 @@
         </div>
     </div>
 </section>
+{% block scripts %}
+{% if request.user.is_staff %}
+{% else %}
+<script>
+    window.location.replace("{% url 'adminaaccess' %}");
+</script>
+{% endif %}
+{% endblock scripts %}
 {% endblock content %}
 
 
