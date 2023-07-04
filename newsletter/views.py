@@ -53,22 +53,22 @@ def subscription_confirmed(request, *args, **kwargs):
 def start_unsubscribe(request):
     if request.method =="POST":
         email = request.POST.get('email')
-        # try:
-        #     subscriber = Subscriber.objects.get(email=email)
-        #     template_name = 'newsletter/unsubscribe_email.html'
-        #     context = {'link': domain_name + reverse('unsubscribe', kwargs={'slug': subscriber.slug}), 'contact_link': domain_name + reverse('contact')}
-        #     email_html_template = get_template(template_name).render(context)
-        #     mail = EmailMessage(subject='Unsubscribe from our email', body=email_html_template, from_email=site_email, to = [subscriber.email])
-        #     mail.content_subtype = 'html'
-        #     mail.attach_alternative = (email_html_template, "text/html")
-        #     EmailThreading(mail).start()
-        #     messages.success(request, "unsubscribe Link has been sent to {}. Can't find the link? check your spam folder".format(email))
-        #     return redirect('start_unsubscribe')
-        # except Subscriber.DoesNotExist:
-        #     messages.error(request, 'This email does not exist on our list')
-        #     return render(request, 'newsletter/start_unsubscribe.html', {
-        #     'written_email': email,
-        # })
+        try:
+            subscriber = Subscriber.objects.get(email=email)
+            template_name = 'newsletter/unsubscribe_email.html'
+            context = {'link': domain_name + reverse('unsubscribe', kwargs={'slug': subscriber.slug})}
+            email_html_template = get_template(template_name).render(context)
+            mail = EmailMessage(subject='Unsubscribe from our email', body=email_html_template, from_email=site_email, to = [subscriber.email])
+            mail.content_subtype = 'html'
+            mail.attach_alternative = (email_html_template, "text/html")
+            EmailThreading(mail).start()
+            messages.success(request, "unsubscribe Link has been sent to {}. Can't find the link? check your spam folder".format(email))
+            return redirect('start_unsubscribe')
+        except Subscriber.DoesNotExist:
+            messages.error(request, 'This email does not exist on our list')
+            return render(request, 'newsletter/start_unsubscribe.html', {
+            'written_email': email,
+        })
     return render(request, 'newsletter/start_unsubscribe.html', {
 
     })

@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="content">
-                        <form method="post">
+                        <form method="post" id="form">
                             {% csrf_token %}
                             <h1>Welcome to Our Newsletter!</h1>
                             <h2 class="text-center text-uppercase">Stay informed, stay ahead – subscribe to our newsletter now!</h2>
@@ -19,7 +19,7 @@
                             <div class="input-group">
                                 <input type="email" class="form-control" name="email" autofocus autocomplete="email" placeholder="Enter your email">
                                 <span class="input-group-btn">
-                                    <button class="btn submit" type="submit">Subscribe</button>
+                                    <button class="btn submit g-recaptcha" type="submit" data-sitekey="6Ld6I_AlAAAAAOeEkm_jkXm-5fgbtOswjwuq8E9p" data-callback='onSubmit' data-action='submit'>Subscribe</button>
                                 </span>
                             </div>
                         </form>
@@ -29,4 +29,14 @@
         </div>
     </section>
 {% endblock content %}
+{% block scripts %}
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+    function onSubmit(token) {
+      document.getElementById("form").submit();
+    }
+  </script>
+{% endblock scripts %}
+
+
    

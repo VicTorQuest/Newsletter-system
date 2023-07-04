@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'newsletter/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block link %}
@@ -6,19 +6,19 @@
 {% endblock link %}
 {% block title %}Unscription successful | {% endblock title %}
 
-{% block contents %}
-<div class="col-md-12 mb-0 post p-3 pb-4 my-lg-0 mb-5 p-lg-5 subscription full-post">
-    <h1 class="pb-3 mb-4 mb-lg-5 heading">Unsubscribe successful</h1>
+{% block content %}
+<div class="col-md-12 mb-0 post p-3 pb-4 my-5 p-lg-5 subscription full-post">
+    <h1 class="mb-3 heading">Unsubscribe successful</h1>
     <form method="post" class="mb-4" data-aos="fade-in">
-    {% csrf_token %}
-    {% include 'message.html' %}
-    <p>You will no longer receive email marketing from this list</p>
-    <p style="color: #f0f0f0;"><b>if you have a moment, please let us know why you unsubscribed</b></p>
-    
-    {{form|crispy}}
-    <button class="btn submit mt-lg-3" type="submit">Submit</button>
+        {% csrf_token %}
+        {% include 'newsletter/message.html' %}
+        <p>You will no longer receive email marketing from this list</p>
+        <p><b>if you have a moment, please let us know why you unsubscribed</b></p>
+        
+        {{form|crispy}}
+        <button class="btn submit mt-3" type="submit">Submit</button>
     </form>
-    <a href="{% url 'home' %}">&LeftArrow;return to our website</a>
+    <a href="{% url 'home' %}">&LeftArrow; &nbsp;return to our website</a>
 </div>
-{% endblock contents %}
+{% endblock content %}
 

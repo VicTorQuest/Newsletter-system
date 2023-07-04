@@ -11,6 +11,10 @@ h1, h2, .navbar-brand {
     font-family: 'Fruktur', cursive;
 }
 
+a {
+    text-decoration: none;
+}
+
 
 .navbar {
     background-color: white !important;
