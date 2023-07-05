@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="col-md-12 mb-0 post p-3 pb-4 my-5 p-lg-5 subscription full-post">
-    <h1 class="mb-3 heading">Unsubscribe successful</h1>
+    <h1 class="mb-3" style="color: #294c69;">Unsubscribe successful</h1>
     <form method="post" class="mb-4" data-aos="fade-in">
         {% csrf_token %}
         {% include 'newsletter/message.html' %}
