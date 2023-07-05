@@ -30,9 +30,10 @@ class SendNewsLetter(threading.Thread):
 
         email_msg = EmailMultiAlternatives()
         connection = email_msg.get_connection()              
-        connection.open()    
+        connection.open()
+        print('sending mails')
         for subscriber in self.email_list:
-            context_data = {'edit_preference': domain_name + reverse('edit_preference', kwargs={'slug': subscriber.slug}), 'unsubscribe': domain_name + reverse('unsubscribe', kwargs={'slug': subscriber.slug}), "privacy_link": domain_name + reverse('privacy'), "message":message, "first_name": subscriber.first_name, "last_name": subscriber.last_name, "img_link": self.obj.content_image_link, "content_link": self.obj.content_link, "link_subject": self.obj.link_subject, 'email': subscriber.email}
+            context_data = {'edit_preference': domain_name + reverse('edit_preference', kwargs={'slug': subscriber.slug}), 'unsubscribe': domain_name + reverse('unsubscribe', kwargs={'slug': subscriber.slug}), "message":message, "first_name": subscriber.first_name, "last_name": subscriber.last_name, "img_link": self.obj.content_image_link, "content_link": self.obj.content_link, "link_subject": self.obj.link_subject, 'email': subscriber.email}
             email_html_template = get_template(html_template_path).render(context_data)
             email_msg.subject = subject
             email_msg.from_email = from_this_email
@@ -43,4 +44,5 @@ class SendNewsLetter(threading.Thread):
             email_msg.attach_alternative = (email_html_template, "text/html")
             email_msg.connection = connection
             email_msg.send(fail_silently=True)
+            print('mail sent')
         connection.close()
