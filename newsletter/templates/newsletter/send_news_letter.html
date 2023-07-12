@@ -2,6 +2,45 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block title %}Send newsletter | {% endblock title %}
+{% block link %}
+<style>
+    .sendmail-maillist {
+        display: flex;
+    }
+
+    .related-widget-wrapper select {
+        min-height: 80px;
+    }
+
+    .modal-title {
+        color: #294c69;
+    }
+
+    .save-btn {
+        background-color: #294c69;
+        color: white;
+    }
+    
+
+    @media (max-width: 480px){
+        .related-widget-wrapper {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .related-widget-wrapper select {
+            flex: 1 1 auto;
+            max-width: 100%;
+        }
+
+        .sendmail-maillist {
+        display: block;
+    }
+}
+</style>
+{% endblock link %}
+
+
 
 
 {% block content %}
@@ -15,15 +54,59 @@
                     <form method="post">
                         {% csrf_token %}
                         {{form|crispy}}
-                        <button class="btn submit mt-lg-3" type="submit">Send mail</button>
+                        <div class="mt-lg-3 sendmail-maillist">
+                            <button class="btn me-3" style="max-height: 35px;" type="submit">Send mail</button>
+                            <div class="related-widget-wrapper d-flex align-items-center">
+                                <select name="category" required="" id="allemails"  multiple="">
+                                    {% for subscriber in subscribers %}
+                                    <option value="{{subscriber.id}}">{{subscriber.email}}</option>
+                                    {% endfor %}
+                                </select>
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="border-0" data-bs-toggle="modal" title="Add an email" data-bs-target="#exampleModal">
+                                    <img src="/static/admin/img/icon-addlink.svg" alt="Add">
+                                </button>
+
+
+
+
+                                    
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form class="modal-dialog modal-dialog-centered" id="addEmailForm" method="post">
+        {% csrf_token %}
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add recipient email</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input type="email" class="form-control mb-0" id="addedMail" required placeholder="name@example.com">
+                <small class="message"></small>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn save-btn">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
 {% block scripts %}
 {% if request.user.is_staff %}
+<script src="{% static 'newsletter/scripts/add_email.js' %}"></script>
 {% else %}
 <script>
     window.location.replace("{% url 'adminaaccess' %}");

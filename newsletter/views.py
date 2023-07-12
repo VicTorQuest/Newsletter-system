@@ -1,8 +1,10 @@
+import time
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.mail import EmailMessage
+from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseServerError
 from django.shortcuts import redirect, render, get_object_or_404
 from django.template.loader import get_template
 from django.urls import reverse
@@ -145,6 +147,7 @@ def edit_preference(request, slug):
 
 def send_news_letter(request):
     form = SendNewsLetter()
+    subscribed_emails = Subscriber.objects.all()
     if request.method == "POST":
         form = SendNewsLetter(request.POST or None)
         if form.is_valid():
@@ -153,7 +156,21 @@ def send_news_letter(request):
             return redirect('send_news_letter')
     return render(request, 'newsletter/send_news_letter.html', {
         'form': form,
+        'subscribers': subscribed_emails
     })
+
+def addemail(request):
+    if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        email = request.POST.get('email')
+        time.sleep(3)
+        if Subscriber.objects.filter(email=email).exists():
+            return HttpResponseBadRequest('This email is already subscribed to our newsletter')
+        try:
+            new_subscriber = Subscriber.objects.create(email=email)
+        except:
+            return HttpResponseServerError('Something went wrong')
+        
+    return JsonResponse({'message': 'Subscription confirmed', 'email': new_subscriber.email, 'email_id': new_subscriber.id})
 
 def adminaaccess(request):
     return render(request, 'newsletter/adminaaccess.html')
