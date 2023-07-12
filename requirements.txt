@@ -1,0 +1,8 @@
+asgiref==3.6.0
+better-profanity==0.7.0
+Django==4.0.2
+django-crispy-forms==1.14.0
+django-dotenv==1.4.2
+django-recaptcha==3.0.0
+sqlparse==0.4.3
+tzdata==2023.3
